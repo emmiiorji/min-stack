@@ -17,22 +17,22 @@ class Stack {
     if(!this.min_stack) {
       this.min_stack = new Stack(number)
     }
-    this.mainPush(number, this);
+    this.mainPush(number);
     if(number <= this.peek(this.min_stack)) this.mainPush(number, this.min_stack);
   }
 
   mainPush(number, node=this) {
     const newNode = new Node(number);
     if(node.top.value === null) {
-      this.top = newNode;
-      this.bottom = newNode;
+      node.top = newNode;
+      node.bottom = newNode;
     } else {
       [node.top, node.top.next] = [newNode, node.top];
     }
   }
   
   pop() {
-    let popValue = this.mainPop(this);
+    let popValue = this.mainPop();
     if(popValue <= this.peek(this.min_stack)) this.mainPop(this.min_stack);
     return popValue;
   }
